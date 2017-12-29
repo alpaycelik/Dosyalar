@@ -1,6 +1,7 @@
 package celik.alpay.dosyalar;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +35,20 @@ public class MainActivity extends AppCompatActivity {
             TextView tv = (TextView) findViewById(R.id.metin);
             tv.setText(br.readLine());
             fis.close();
-
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        try{
+            Resources r = getResources();
+            InputStream is = r.openRawResource(R.raw.deneme);
+            Scanner s = new Scanner(is);
+            TextView tv = (TextView) findViewById(R.id.metin);
+            String str = "";
+            while (s.hasNext()){
+                str += " "+s.next();
+            }
+            tv.setText(str);
         }
         catch (Exception e){
             e.printStackTrace();
